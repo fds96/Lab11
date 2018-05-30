@@ -7,6 +7,7 @@ public class Event implements Comparable<Event>{
 	private int numeroPersone;
 	private int durata;
 	private float tolleranza;
+	private Tavolo tavolo;
 	
 	public Event(EventType tipo, int tempoArrivo, int numeroPersone, int durata, float tolleranza) {
 		super();
@@ -15,6 +16,7 @@ public class Event implements Comparable<Event>{
 		this.numeroPersone = numeroPersone;
 		this.durata = durata;
 		this.tolleranza = tolleranza;
+		this.tavolo = null;
 	}
 
 	public EventType getTipo() {
@@ -37,6 +39,14 @@ public class Event implements Comparable<Event>{
 		return tolleranza;
 	}
 
+	public Tavolo getTavolo() {
+		return tavolo;
+	}
+
+	public void setTavolo(Tavolo tavolo) {
+		this.tavolo = tavolo;
+	}
+
 	@Override
 	public int compareTo(Event other) {
 		return this.tempoArrivo-other.getTempoArrivo();
@@ -48,6 +58,7 @@ public class Event implements Comparable<Event>{
 		int result = 1;
 		result = prime * result + durata;
 		result = prime * result + numeroPersone;
+		result = prime * result + ((tavolo == null) ? 0 : tavolo.hashCode());
 		result = prime * result + tempoArrivo;
 		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
 		result = prime * result + Float.floatToIntBits(tolleranza);
@@ -67,6 +78,11 @@ public class Event implements Comparable<Event>{
 			return false;
 		if (numeroPersone != other.numeroPersone)
 			return false;
+		if (tavolo == null) {
+			if (other.tavolo != null)
+				return false;
+		} else if (!tavolo.equals(other.tavolo))
+			return false;
 		if (tempoArrivo != other.tempoArrivo)
 			return false;
 		if (tipo != other.tipo)
@@ -75,10 +91,9 @@ public class Event implements Comparable<Event>{
 			return false;
 		return true;
 	}
+
 	
-	public String tostring() {
-		return "Tipo: " + this.tipo+ " Numero di Persone: " + this.numeroPersone + " Tempo di Arrivo: "
-				+ this.tempoArrivo + " Durata: " +this.durata + " Tolleranza: " + this.tolleranza;
-	}
+	
+	
 	
 }

@@ -27,7 +27,7 @@ public class BarController {
 
     @FXML
     void doSimula(ActionEvent event) {
-
+    	txtResult.appendText(model.simula());
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
